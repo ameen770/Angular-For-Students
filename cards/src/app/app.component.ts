@@ -11,11 +11,10 @@ export class AppComponent implements OnInit {
   title = 'students';
   students: Student[] = [];
   student: Student = {
-    StudID: '',
-    Name: '',
-    Address: '',
-    Phone: '',
-    DID: ''
+    studID: '',
+    name: '',
+    address: '',
+    departmentName: ''
   }
 
   constructor(private studentService: StudentsService) {
@@ -35,17 +34,16 @@ export class AppComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.student.StudID === '') {
+    if (this.student.studID === '') {
       this.studentService.addStudent(this.student)
         .subscribe(
           response => {
             this.getAllStudents();
             this.student = {
-              StudID: '',
-              Name: '',
-              Address: '',
-              Phone: '',
-              DID: ''
+              studID: '',
+              name: '',
+              address: '',
+              departmentName: ''
             }
           }
         );
@@ -73,11 +71,10 @@ export class AppComponent implements OnInit {
         response => {
           this.getAllStudents();
           this.student = {
-            StudID: '',
-              Name: '',
-              Address: '',
-              Phone: '',
-              DID: ''
+            studID: '',
+            name: '',
+            address: '',
+            departmentName: ''
           }
         }
       );

@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Student } from '../Models/student.model';
 import { Observable } from 'rxjs';
@@ -8,18 +8,19 @@ import { Observable } from 'rxjs';
 })
 export class StudentsService {
 
-  baseUrl = 'https://localhost:7136/api/Students'
+  // baseUrl = 'https://localhost:7136/api/Students'
+  baseUrl = 'https://localhost:7136/Student/List'
 
   constructor(private http: HttpClient) { }
 
   // Get all student
 
   getAllStudents(): Observable<Student[]> {
-    // const headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   'Access-Control-Allow-Origin': 'http://localhost:4200'
-    // });
-    return this.http.get<Student[]>(this.baseUrl);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': 'http://localhost:4200'
+    });
+    return this.http.get<Student[]>(this.baseUrl, { headers });
   }
 
   addStudent(student: Student): Observable<Student> {
@@ -27,11 +28,11 @@ export class StudentsService {
     return this.http.post<Student>(this.baseUrl, student);
   }
 
-  deleteStudent(StudID: string): Observable<Student> {
-    return this.http.delete<Student>(this.baseUrl + '/' + StudID);
+  deleteStudent(studID: string): Observable<Student> {
+    return this.http.delete<Student>(this.baseUrl + '/' + studID);
   }
 
   updateStudent(student: Student): Observable<Student> {
-    return this.http.put<Student>(this.baseUrl + '/' + student.StudID, student);
+    return this.http.put<Student>(this.baseUrl + '/' + student.studID, student);
   }
 }
